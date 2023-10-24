@@ -22,7 +22,7 @@ const initialState: IUserSlice = {
 }
 
 type FormModel = {
-  email: string | number
+  email: string
   password: string
 }
 
@@ -61,7 +61,7 @@ const authSlice = createSlice({
       state.loading = false
       state.isAuthBool = false
       state.authError = true
-      state.message = 'Щось пішло не так.'
+      state.message = 'Ваш email або пароль не є вірними'
     })
   }
 })

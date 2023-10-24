@@ -1,0 +1,9 @@
+.user-name {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  width: 100%;
+  background: gray;
+  height: 10%;
+  font-size: 2rem;
+}

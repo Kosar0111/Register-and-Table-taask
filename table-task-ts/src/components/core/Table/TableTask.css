@@ -1,0 +1,17 @@
+.table-field {
+  margin: 10% auto;
+  width: 70%;
+  height: 60%;
+  border: 2px solid rgb(213, 213, 237);
+  border-radius: 5px;
+}
+.table-field-label {
+  display: flex;
+  background-color: lightblue;
+}
+.table-field-label > * {
+  flex: 1 1 33.3%;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 3rem;
+}
