@@ -7,6 +7,7 @@ import { Pagination } from '../Pagination/Pagination'
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks'
 import { getTable } from '../../../store/tableSlice'
 import './TableTask.css'
+import { SortName } from '../Sort/Sort'
 
 export const TableTask = () => {
   const tasks = useAppSelector((state) => state.table.tasks)
@@ -14,7 +15,9 @@ export const TableTask = () => {
 
   const total = tasks.length
   const [currentPage, setCurrentPage] = useState(1)
-  const [postPerPage] = useState(4)
+  const [postPerPage] = useState(3)
+  const [sortName, setSortName] = useState('')
+  const [nameAll, setNameAll] = useState(tasks)
 
   const indexOfLastPage = currentPage * postPerPage
   const indexOfFirstPage = indexOfLastPage - postPerPage
@@ -22,6 +25,17 @@ export const TableTask = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
+  const sort = (sort: string) => {
+    setSortName(sort)
+    setNameAll(
+      nameAll.slice().sort((a, b): any => {
+        return sort !== 'lowest'
+          ? a.name.toLowerCase().localeCompare(b.name.toLocaleLowerCase()) &&
+              typeof parseInt(a.name) !== typeof parseInt(b.name)
+          : b.name.toLowerCase().localeCompare(a.name.toLocaleLowerCase())
+      })
+    )
+  }
   useEffect(() => {
     dispatch(getTable())
   }, [dispatch])
@@ -36,6 +50,7 @@ export const TableTask = () => {
         <Task key={task.id} {...task} />
       ))}
       <Pagination taskPerPage={postPerPage} total={total} paginate={paginate} />
+      <SortName sortName={sortName} sort={sort} />
     </div>
   )
 }
